@@ -1,0 +1,51 @@
+---
+
+- name: Install Samba package
+  package:
+    name: "{{ samba_pkg }}"
+  notify:
+    - Restart Samba service
+  tags:
+    - samba_pkg
+
+- name: Configure Samba
+  template:
+    src: smb.conf.j2
+    dest: "{{ samba_config_file }}"
+  notify:
+    - Restart Samba service
+  tags:
+    - samba_config
+
+- name: Configure Samba users
+  template:
+    src: smbusers.j2
+    dest: "{{ samba_users_config_file }}"
+  notify:
+    - Restart Samba service
+  tags:
+    - samba_config
+
+- name: Configure Samba hosts
+  template:
+    src: lmhosts.j2
+    dest: "{{ samba_hosts_config_file }}"
+  notify:
+    - Restart Samba service
+  tags:
+    - samba_config
+
+- name: Enable Samba service
+  service:
+    name: "{{ samba_service }}"
+    enabled: yes
+  tags:
+    - samba_service
+
+- name: Start Samba service
+  service:
+    name: "{{ samba_service }}"
+    state: started
+  register: samba_service_started
+  tags:
+    - samba_service

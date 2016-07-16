@@ -1,0 +1,9 @@
+---
+
+- name: Restart Samba service
+  service:
+    name: "{{ samba_service }}"
+    state: restarted
+  when: >
+    samba_service_started is not defined or
+    not samba_service_started.changed
