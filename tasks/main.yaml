@@ -38,7 +38,7 @@
 - name: Enable Samba service
   service:
     name: "{{ samba_service }}"
-    enabled: yes
+    enabled: "{{ samba_service_enable }}"
   tags:
     - samba_service
 
