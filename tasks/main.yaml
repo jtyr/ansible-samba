@@ -46,6 +46,7 @@
   service:
     name: "{{ samba_service }}"
     state: started
+  when: "{{ samba_service_start }}"
   register: samba_service_started
   tags:
     - samba_service

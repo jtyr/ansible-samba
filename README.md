@@ -57,6 +57,12 @@ samba_pkg: samba
 # Samba service name
 samba_service: smb
 
+# Enable the Samba service by default
+samba_service_enable: yes
+
+# Start the Samba service by default
+samba_service_start: yes
+
 # Path to the Samba config files
 samba_config_file: /etc/samba/smb.conf
 samba_hosts_config_file: /etc/samba/lmhosts
