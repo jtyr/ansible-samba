@@ -5,5 +5,6 @@
     name: "{{ samba_service }}"
     state: restarted
   when: >
-    samba_service_started is not defined or
-    not samba_service_started.changed
+    samba_service_start and (
+        samba_service_started is not defined or
+        not samba_service_started.changed)
